@@ -26,9 +26,12 @@ Follow these steps to set up and run the TypeScript Form Builder app on your loc
 - cd form-builder-app
 - npm install
 - npm i typescript
+- npm i tailwindcss
+- configure your tailwind.config.js file
 - npm i @ant-design/icons
 - npm i antd
 - npm i react-quill
+- npm i eslint
 
 3. Start the development server:
    npm start
@@ -45,11 +48,12 @@ Follow these steps to set up and run the TypeScript Form Builder app on your loc
 
 ## Technologies Used
 
-TypeScript
-React
-HTML/CSS
-React-Quill
-Antd
+- TypeScript
+- React
+- HTML/CSS
+- React-Quill
+- Antd
+- ESLint (for linting)
 
 ## Contributing
 
