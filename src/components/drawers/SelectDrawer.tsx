@@ -122,10 +122,12 @@ const SelectDrawer: React.FC<MySelectProps> = ({
             })}
           </div>
         </div>
-<div className="">
-
-        <Switch  defaultChecked onChange={onChange} /> Is Multi select
-</div>
+        <div className="flex">
+          <p className=" rounded-2xl border-2 mr-2">
+            <Switch onChange={onChange} />
+          </p>
+          Is Multi select
+        </div>
         <button
           className="bg-green-700  hover:bg-blue-700 rounded-lg w-full h-10 text-white text-xl  my-4 font-medium shadow hover:shadow-xl"
           onClick={() => {

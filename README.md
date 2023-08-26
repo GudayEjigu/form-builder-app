@@ -26,6 +26,8 @@ Follow these steps to set up and run the TypeScript Form Builder app on your loc
 - cd form-builder-app
 - npm install
 - npm i typescript
+- npm i tailwindcss
+- configure your tailwind.config.js file
 - npm i @ant-design/icons
 - npm i antd
 - npm i react-quill
@@ -49,6 +51,10 @@ Follow these steps to set up and run the TypeScript Form Builder app on your loc
 - TypeScript
 - React
 - HTML/CSS
+<<<<<<< HEAD
+=======
+- TailwindCSS
+>>>>>>> b1c6e1a3e4fd14b11da1b03cfc83c15575c67a76
 - React-Quill
 - Antd
 - ESLint (for linting)
@@ -57,10 +63,10 @@ Follow these steps to set up and run the TypeScript Form Builder app on your loc
 
 Contributions are welcome! If you want to contribute to this project, please follow these steps:
 
-Fork the repository.
-Create a new branch for your feature or bug fix.
-Commit your changes and push them to your forked repository.
-Submit a pull request to the main fork ( https://github.com/GudayEjigu/form-builder-app.git), providing a detailed description of your changes.
+- Fork the repository.
+- Create a new branch for your feature or bug fix.
+- Commit your changes and push them to your forked repository.
+- Submit a pull request to the main fork ( https://github.com/GudayEjigu/form-builder-app.git), providing a detailed description of your changes.
 
 ## Contact
 
