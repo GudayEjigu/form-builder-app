@@ -6,14 +6,21 @@ import { SettingFilled } from "@ant-design/icons";
 interface MyProps {
   label: string;
   placeHolder: string;
+  isRequired: boolean;
+  maxLength: number;
+
 }
 
-const EmailInput: React.FC<MyProps> = ({ placeHolder, label }) => {
+const EmailInput: React.FC<MyProps> = ({ placeHolder, label, isRequired , maxLength}) => {
   const [inputLabel, setInputLabel] = useState<string>(label);
   const [inputPlaceHolder, setInputPlaceHolder] = useState<string>(placeHolder);
+  const [inputMaxLength, setInputMaxLength] = useState<number>(maxLength);
+
   const [editLabel, setEditLabel] = useState<string>("");
   const [editPlaceholder, setEditPlaceholder] = useState<string>("");
   const [editModal, setEditModal] = useState<boolean>(false);
+
+  const [inputRequired, setInputRequired] = useState<boolean>(isRequired);
   const OnEdit = () => {
     setEditLabel(inputLabel);
     setEditPlaceholder(inputPlaceHolder);
@@ -34,21 +41,51 @@ const EmailInput: React.FC<MyProps> = ({ placeHolder, label }) => {
 
   return (
     <div>
-      <p className="flex text-xl font-medium capitalize">{inputLabel}</p>
-      <div className="flex">
-        <div>
-          <input
-            type="email"
-            className="w-[400px]"
-            placeholder={inputPlaceHolder}
-          />{" "}
-          <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
-            <SettingFilled />{" "}
-          </button>
-          <br />
-          <p className="flex text-xs opacity-20 ">Email only</p>
-        </div>
-      </div>
+      {inputRequired ? (
+        <>
+          <p className="flex text-xl font-medium capitalize">
+            {inputLabel} <p className="text-red-700">*</p>
+          </p>
+          <div className="flex">
+            <div>
+              <Input
+                addonAfter=".com"
+                required
+                type="email"
+                className="w-[400px]"
+                placeholder={inputPlaceHolder}
+                maxLength={inputMaxLength}
+
+              />{" "}
+              <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
+                <SettingFilled />{" "}
+              </button>
+              <br />
+              <p className="flex text-xs opacity-20 ">Email only</p>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <p className="flex text-xl font-medium capitalize">{inputLabel}</p>
+          <div className="flex">
+            <div>
+              <input
+                type="email"
+                className="w-[400px]"
+                placeholder={inputPlaceHolder}
+                maxLength={inputMaxLength}
+
+              />{" "}
+              <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
+                <SettingFilled />{" "}
+              </button>
+              <br />
+              <p className="flex text-xs opacity-20 ">Email only</p>
+            </div>
+          </div>
+        </>
+      )}
       {editModal ? (
         <div
           className="flex  bg-white py-8  transition-y  duration-500

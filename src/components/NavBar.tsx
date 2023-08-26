@@ -35,6 +35,8 @@ type MyProps = {
   HandleAddEditor: Function;
   HandleAddVideo: Function;
   HandleAddMp4: Function;
+  setIsRequired: Function;
+  setMaxLength: Function;
   setLabel: React.Dispatch<React.SetStateAction<string>>;
   setPlaceHolder: React.Dispatch<React.SetStateAction<string>>;
   options: IState[];
@@ -62,6 +64,9 @@ const NavBar: React.FC<MyProps> = ({
   HandleAddEditor,
   HandleAddVideo,
   HandleAddMp4,
+  setIsRequired,
+  setMaxLength,
+
   setLabel,
   setPlaceHolder,
   options,
@@ -151,8 +156,9 @@ const NavBar: React.FC<MyProps> = ({
 
   return (
     <div className="flex  flex-col ">
-      <div className="h-32  grid bg-green-800 grid- items-center">
+      <div className="h-32   pt-10 bg-green-800 items-center">
         <p className="text-white  font-bold text-3xl ">Form Builder App</p>
+        <p className="text-white  text-xs ">by: Guday Berhanu Ejigu</p>
       </div>
       <div className="bg-gray-00 flex flex-col">
         {" "}
@@ -162,7 +168,7 @@ const NavBar: React.FC<MyProps> = ({
             showTextDrawer();
           }}
         >
-           Inputs
+          Inputs
         </button>
         <TextDrawer
           openText={openText}
@@ -174,6 +180,8 @@ const NavBar: React.FC<MyProps> = ({
           HandleAddNumber={HandleAddNumber}
           HandleAddPassword={HandleAddPassword}
           HandleAddDateTime={HandleAddDateTime}
+          setIsRequired={setIsRequired}
+          setMaxLength={setMaxLength}
         />
         <button
           className="hover:bg-green-700 hover:w-full h-16  text-lg font-medium shadow hover:shadow-xl rounded-lg  border-2"

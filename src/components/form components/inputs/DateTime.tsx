@@ -29,6 +29,7 @@ const DateTime: React.FC<MyProps> = ({ label }) => {
   const [type, setType] = useState<PickerType>('time');
   const [editLabel, setEditLabel] = useState<string>("");
   const [editModal, setEditModal] = useState<boolean>(false);
+
   const OnEdit = () => {
     setEditLabel(inputLabel);
     setEditModal(!editModal);
@@ -42,11 +43,11 @@ const DateTime: React.FC<MyProps> = ({ label }) => {
   };
 
   return (
-    <div>
+    <div >
       <p className="flex text-xl font-medium capitalize">{inputLabel}</p>
       <div className="w-[600px]">
       <Space>
-      <Select value={type} onChange={setType}>
+      <Select  value={type} onChange={setType} >
         <Option value="time">Time</Option>
         <Option value="date">Date</Option>
         <Option value="week">Week</Option>
@@ -54,7 +55,7 @@ const DateTime: React.FC<MyProps> = ({ label }) => {
         <Option value="quarter">Quarter</Option>
         <Option value="year">Year</Option>
       </Select>
-      <PickerWithType type={type} onChange={(value) => console.log(value)} />
+      <PickerWithType  type={type} onChange={(value) => console.log(value)} />
     </Space>
     <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
       <SettingFilled />{" "}

@@ -21,6 +21,7 @@ import DateTime from "./form components/inputs/DateTime";
 import PasswordInput from "./form components/inputs/PasswordInput";
 import NumberInput from "./form components/inputs/NumberInput";
 import EmailInput from "./form components/inputs/EmailInput";
+import { kMaxLength } from "buffer";
 
 type IStateHome = {
   HandleAddText: Function;
@@ -40,13 +41,23 @@ const Home = () => {
   const [textClicked2, setTextClicked2] = useState<IStateHome["val"]>([]);
   const [form, setForm] = useState<IStateHome["Form"]>([]);
   const [label, setLabel] = useState<string>("");
-  const [formTitle, setFormTitle] = useState<string>("");
-  const [formDescription, setFormDescription] = useState<string>("");
+  const [formTitle, setFormTitle] = useState<string>("[Your Title]");
+  const [formDescription, setFormDescription] = useState<string>(
+    "[Your Description]...click the + button"
+  );
   const [placeHolder, setPlaceHolder] = useState<string>("");
   const [options, setOptions] = useState<IState[]>([]);
   const [isMultiple, setIsMultiple] = useState<boolean>(false);
   const [change, setChange] = useState<string>("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isRequired, setIsRequired] = useState<boolean>(false);
+  const [maxLength, setMaxLength] = useState<number>(100);
+
+  console.log(isRequired);
+  const HandleRequiredChange = () => {
+    setIsRequired(!isRequired);
+    console.log(isRequired);
+  };
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -171,305 +182,332 @@ const Home = () => {
             options={options}
             setOptions={setOptions}
             appendObject={appendObject}
+            setIsRequired={setIsRequired}
+            setMaxLength={setMaxLength}
           />
         </div>
         <div className=" w-3/4 h-full  ">
           <p className="text-green-800 font-bold text-6xl my-5">
             Build Your Form
           </p>
-          <div className="mx-12 pl-20 border h-[80vh] overflow-y-scroll    mb-8 p-8  bg-amber-50 ">
-            <div className="border-b-2" >
-              <p className=" text-3xl font-medium mb-2 capitalize">{formTitle}</p>
-              <p className=" flex text-left mb-2"><p className="font-medium pr-2">Description:</p>{formDescription}</p>
+          <div className="mx-12 pl-20 border h-[80vh] overflow-y-auto  overflow-x-auto   mb-8 p-8  bg-amber-50 shadow-xl ">
+            <div className="border-b-2">
+              <p className=" text-3xl font-medium mb-2 capitalize">
+                {formTitle}
+              </p>
+              <p className=" flex text-left mb-2">
+                <p className="font-medium pr-2">Description:</p>
+                {formDescription}
+              </p>
             </div>
             <div className="flex justify-center">
-            <div className="flex flex-col  ">
-              {form.map((item: any, i: number) => {
-                return (
-                  <div key={item}>
-                    {item == "Text" ? (
-                      <div className="flex  mt-6 ">
-                        <div>
-                          <BasicInput placeHolder={placeHolder} label={label} />
+              <div className="flex flex-col  ">
+                {form.map((item: any, i: number) => {
+                  return (
+                    <div key={item}>
+                      {item == "Text" ? (
+                        <div className="flex  mt-6 ">
+                          <div>
+                            <BasicInput
+                              placeHolder={placeHolder}
+                              label={label}
+                              isRequired={isRequired}
+                              maxLength={maxLength}
+                            />
+                          </div>
+                          <Button
+                            className="w-4 bg-red-500 mx-4 pt-2 mt-6 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
                         </div>
-                        <Button
-                          className="w-4 bg-red-500 mx-4 pt-2 mt-6 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "Email" ? (
-                      <div className="flex mt-6 border-2">
-                        {" "}
-                        <EmailInput label={label} placeHolder={placeHolder} />
-                        <Button
-                          className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "Number" ? (
-                      <div className="flex mt-6 border-2">
-                        {" "}
-                        <NumberInput label={label} placeHolder={placeHolder} />
-                        <Button
-                          className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "Password" ? (
-                      <div className="flex mt-6 border-2">
-                        {" "}
-                        <PasswordInput label={label} />
-                        <Button
-                          className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "DateTime" ? (
-                      <div className="flex mt-6 border-2  border-4 border-dotted">
-                        {" "}
-                        <DateTime label={label} />
-                        <Button
-                          className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "Select" ? (
-                      <div className="flex mt-6 border-2">
-                        {" "}
-                        <SingleSelect
-                          placeHolder={placeHolder}
-                          label={label}
-                          options={options}
-                        />
-                        <Button
-                          className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "MultiSelect" ? (
-                      <div className="flex mt-6 border-2">
-                        {" "}
-                        <MultiSelect
-                          placeHolder={placeHolder}
-                          label={label}
-                          options={options}
-                        />
-                        <Button
-                          className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "Radio" ? (
-                      <div className="flex mt-6 border-2">
-                        {" "}
-                        <RadioButton label={label} />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "Switch" ? (
-                      <div className="flex mt-6 border-2">
-                        {" "}
-                        <SwitchInput label={label} />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "CheckBox" ? (
-                      <div className="flex mt-6 border-2">
-                        {" "}
-                        <CheckBoxInput label={label} />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "PngOnly" ? (
-                      <div className="flex mt-6 border-2">
-                        {" "}
-                        <PNGOnly label={label} />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "JpgOnly" ? (
-                      <div className="flex mt-6 border-2">
-                        {" "}
-                        <JPGOnly label={label} />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "Image" ? (
-                      <div className="flex mt-6  border-2 p-6">
-                        {" "}
-                        <ImageInput label={label} />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "Pdf" ? (
-                      <div className="flex mt-6 border-2 border-2 p-6">
-                        {" "}
-                        <PDFOnly label={label} />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "Word" ? (
-                      <div className="flex mt-6  border-2 p-6">
-                        {" "}
-                        <WORDOnly label={label} />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "File" ? (
-                      <div className="flex mt-6 border-2 p-6">
-                        {" "}
-                        <FileInput />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "Editor" ? (
-                      <div className="flex mt-6 border-2  h-full py-6">
-                        {" "}
-                        <Editor label={label} />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "Video" ? (
-                      <div className="flex mt-6   h-full py-6 my-6 border-dotted border-4 p-4">
-                        {" "}
-                        <VideoInput label={label} />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : item == "mp4" ? (
-                      <div className="flex mt-6  h-full py-6 my-6 border-dotted border-4 p-4">
-                        {" "}
-                        <MP4Only label={label} />
-                        <Button
-                          className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
-                          shape="circle"
-                          onClick={() => HandleDelete(i)}
-                        >
-                          <DeleteFilled />
-                        </Button>
-                      </div>
-                    ) : null}
-                  </div>
-                );
-              })}
-              <div className="">
-                <FloatButton
-                  icon={<PlusOutlined className=" text-green-700  " />}
-                  style={{ right: 94, bottom: 94 }}
-                  tooltip={<div>Create a new form.</div>}
-                  onClick={showModal}
-                />
-                <Modal
-                  title="Create a new form"
-                  open={isModalOpen}
-                  onCancel={handleCancel}
-                >
-                  <p className="font-medium text-xl mt-5">Title</p>
-                  <Input
-                    type="text"
-                    placeholder="Form title"
-                    className="my-4"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleFormTitleChange(e)
-                    }
+                      ) : item == "Email" ? (
+                        <div className="flex mt-6 border-2">
+                          {" "}
+                          <EmailInput
+                            label={label}
+                            placeHolder={placeHolder}
+                            isRequired={isRequired}
+                            maxLength={maxLength}
+                          />
+                          <Button
+                            className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "Number" ? (
+                        <div className="flex mt-6 border-2">
+                          {" "}
+                          <NumberInput
+                            label={label}
+                            placeHolder={placeHolder}
+                            isRequired={isRequired}
+                            maxLength={maxLength}
+                          />
+                          <Button
+                            className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "Password" ? (
+                        <div className="flex mt-6 border-2">
+                          {" "}
+                          <PasswordInput
+                            label={label}
+                            isRequired={isRequired}
+                            maxLength={maxLength}
+                          />
+                          <Button
+                            className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "DateTime" ? (
+                        <div className="flex mt-6   border-4 border-dotted">
+                          {" "}
+                          <DateTime label={label} />
+                          <Button
+                            className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "Select" ? (
+                        <div className="flex mt-6 border-2">
+                          {" "}
+                          <SingleSelect
+                            placeHolder={placeHolder}
+                            label={label}
+                            options={options}
+                          />
+                          <Button
+                            className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "MultiSelect" ? (
+                        <div className="flex mt-6 border-2">
+                          {" "}
+                          <MultiSelect
+                            placeHolder={placeHolder}
+                            label={label}
+                            options={options}
+                          />
+                          <Button
+                            className="w-4 bg-red-500 mt-9  ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "Radio" ? (
+                        <div className="flex mt-6 border-2">
+                          {" "}
+                          <RadioButton label={label} />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "Switch" ? (
+                        <div className="flex mt-6 border-2">
+                          {" "}
+                          <SwitchInput label={label} />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "CheckBox" ? (
+                        <div className="flex mt-6 border-2">
+                          {" "}
+                          <CheckBoxInput label={label} />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "PngOnly" ? (
+                        <div className="flex mt-6 border-2">
+                          {" "}
+                          <PNGOnly label={label} />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "JpgOnly" ? (
+                        <div className="flex mt-6 border-2">
+                          {" "}
+                          <JPGOnly label={label} />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "Image" ? (
+                        <div className="flex mt-6  border-2 p-6">
+                          {" "}
+                          <ImageInput label={label} />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "Pdf" ? (
+                        <div className="flex mt-6 border-2 border-2 p-6">
+                          {" "}
+                          <PDFOnly label={label} />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "Word" ? (
+                        <div className="flex mt-6  border-2 p-6">
+                          {" "}
+                          <WORDOnly label={label} />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "File" ? (
+                        <div className="flex mt-6 border-2 p-6">
+                          {" "}
+                          <FileInput />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "Editor" ? (
+                        <div className="flex mt-6 border-2  h-full py-6">
+                          {" "}
+                          <Editor label={label} />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "Video" ? (
+                        <div className="flex mt-6   h-full py-6 my-6 border-dotted border-4 p-4">
+                          {" "}
+                          <VideoInput label={label} />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : item == "mp4" ? (
+                        <div className="flex mt-6  h-full py-6 my-6 border-dotted border-4 p-4">
+                          {" "}
+                          <MP4Only label={label} />
+                          <Button
+                            className="w-2 bg-red-500   ml-2 pt-2 text-white flex justify-center "
+                            shape="circle"
+                            onClick={() => HandleDelete(i)}
+                          >
+                            <DeleteFilled />
+                          </Button>
+                        </div>
+                      ) : null}
+                    </div>
+                  );
+                })}
+                <div className="">
+                  <FloatButton
+                    icon={<PlusOutlined className=" text-green-700  " />}
+                    style={{ right: 94, bottom: 94 }}
+                    tooltip={<div>Create a new form.</div>}
+                    onClick={showModal}
                   />
-                  <p className="font-medium text-xl">Description</p>
-                  <Input.TextArea
-                    placeholder="Description..."
-                    className="my-4"
-                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                      handleFormDescriptionChange(e)
-                    }
-                  />
-                  <div className="flex justify-center">
-                    <Button
-                      type="primary"
-                      className="bg-green-700 w-36"
-                      onClick={handleOk}
-                    >
-                      Create New From
-                    </Button>
-                  </div>
-                </Modal>
+                  <Modal
+                    title="Create a new form"
+                    open={isModalOpen}
+                    onCancel={handleCancel}
+                  >
+                    <p className="font-medium text-xl mt-5">Title</p>
+                    <Input
+                      type="text"
+                      placeholder="Form title"
+                      className="my-4"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleFormTitleChange(e)
+                      }
+                    />
+                    <p className="font-medium text-xl">Description</p>
+                    <Input.TextArea
+                      placeholder="Description..."
+                      className="my-4"
+                      onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                        handleFormDescriptionChange(e)
+                      }
+                    />
+                    <div className="flex justify-center">
+                      <Button
+                        type="primary"
+                        className="bg-green-700 w-36"
+                        onClick={handleOk}
+                      >
+                        Create New From
+                      </Button>
+                    </div>
+                  </Modal>
+                </div>
               </div>
             </div>
-          </div></div>
+          </div>
         </div>
       </div>
     </>

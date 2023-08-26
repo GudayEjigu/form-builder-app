@@ -6,14 +6,23 @@ import { SettingFilled } from "@ant-design/icons";
 interface MyProps {
   label: string;
   placeHolder: string;
+  isRequired: boolean;
+  maxLength: number;
+
+  
+
 }
 
-const NumberInput: React.FC<MyProps> = ({ placeHolder, label }) => {
+const NumberInput: React.FC<MyProps> = ({ placeHolder, label, isRequired , maxLength}) => {
   const [inputLabel, setInputLabel] = useState<string>(label);
   const [inputPlaceHolder, setInputPlaceHolder] = useState<string>(placeHolder);
   const [editLabel, setEditLabel] = useState<string>("");
+  const [inputMaxLength, setInputMaxLength] = useState<number>(maxLength);
+
   const [editPlaceholder, setEditPlaceholder] = useState<string>("");
   const [editModal, setEditModal] = useState<boolean>(false);
+  const [inputRequired, setInputRequired] = useState<boolean>(isRequired);
+
   const OnEdit = () => {
     setEditLabel(inputLabel);
     setEditPlaceholder(inputPlaceHolder);
@@ -34,6 +43,45 @@ const NumberInput: React.FC<MyProps> = ({ placeHolder, label }) => {
 
   return (
     <div>
+ {inputRequired ? (
+        <>
+          <p className="flex text-xl font-medium capitalize">{inputLabel}<p className="text-red-700">*</p></p>
+      <div className="flex">
+        <div>
+          <InputNumber required className="w-[200px]" placeholder={inputPlaceHolder}             maxLength={inputMaxLength}
+ />{" "}
+          <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
+            <SettingFilled />{" "}
+          </button>{" "}
+          <br />
+          <p className="flex text-xs opacity-20 ">numbers only</p>
+        </div>
+      </div>
+        </>
+      ) : (
+        <>
+           <p className="flex text-xl font-medium capitalize">{inputLabel}</p>
+      <div className="flex">
+        <div>
+          <InputNumber className="w-[200px]" placeholder={inputPlaceHolder}             maxLength={inputMaxLength}
+ />{" "}
+          <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
+            <SettingFilled />{" "}
+          </button>{" "}
+          <br />
+          <p className="flex text-xs opacity-20 ">numbers only</p>
+        </div>
+      </div>
+        </>
+      )}
+
+
+
+
+
+
+
+
       <p className="flex text-xl font-medium capitalize">{inputLabel}</p>
       <div className="flex">
         <div>

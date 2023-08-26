@@ -5,11 +5,15 @@ import { SettingFilled } from "@ant-design/icons";
 interface MyProps {
   placeHolder: string;
   label: string;
+  isRequired: boolean;
+  maxLength: number;
 }
 
-const BasicInput: React.FC<MyProps> = ({ placeHolder, label }) => {
+const BasicInput: React.FC<MyProps> = ({ placeHolder, label, isRequired, maxLength }) => {
   const [inputLabel, setInputLabel] = useState<string>(label);
   const [inputPlaceHolder, setInputPlaceHolder] = useState<string>(placeHolder);
+  const [inputMaxLength, setInputMaxLength] = useState<number>(maxLength);
+  const [inputRequired, setInputRequired] = useState<boolean>(isRequired);
   const [editLabel, setEditLabel] = useState<string>("");
   const [editPlaceholder, setEditPlaceholder] = useState<string>("");
   const [editModal, setEditModal] = useState<boolean>(false);
@@ -21,7 +25,9 @@ const BasicInput: React.FC<MyProps> = ({ placeHolder, label }) => {
   const handleEditLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditLabel(e.target.value);
   };
-  const handleEditPlaceholderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEditPlaceholderChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setEditPlaceholder(e.target.value);
   };
   const OnSetEdit = () => {
@@ -30,13 +36,32 @@ const BasicInput: React.FC<MyProps> = ({ placeHolder, label }) => {
   };
   return (
     <div>
-      <p className="flex text-xl font-medium capitalize">{inputLabel}</p>
-      <Input className="w-[600px]" placeholder={inputPlaceHolder} />
-      <button
-        className="w-4  mx-4 pt-0 text-2xl "
-        
-        onClick={OnEdit}
-      >
+      {inputRequired ? (
+        <>
+          <p className="flex text-xl font-medium capitalize">
+            {inputLabel}
+            <p className="text-red-700">*</p>
+          </p>
+          <Input
+            required
+            className="w-[600px]"
+            placeholder={inputPlaceHolder}
+            maxLength={inputMaxLength}
+          />
+        </>
+      ) : (
+        <>
+          <p className="flex text-xl font-medium capitalize">{inputLabel}</p>
+          <Input
+            
+            className="w-[600px]"
+            placeholder={inputPlaceHolder}
+            maxLength={inputMaxLength}
+
+          />
+        </>
+      )}
+      <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
         <SettingFilled />{" "}
       </button>
       {editModal ? (
