@@ -8,12 +8,14 @@ interface MyProps {
   placeHolder: string;
   isRequired: boolean;
   maxLength: number;
-
-  
-
 }
 
-const NumberInput: React.FC<MyProps> = ({ placeHolder, label, isRequired , maxLength}) => {
+const NumberInput: React.FC<MyProps> = ({
+  placeHolder,
+  label,
+  isRequired,
+  maxLength,
+}) => {
   const [inputLabel, setInputLabel] = useState<string>(label);
   const [inputPlaceHolder, setInputPlaceHolder] = useState<string>(placeHolder);
   const [editLabel, setEditLabel] = useState<string>("");
@@ -43,56 +45,48 @@ const NumberInput: React.FC<MyProps> = ({ placeHolder, label, isRequired , maxLe
 
   return (
     <div>
- {inputRequired ? (
+      {inputRequired ? (
         <>
-          <p className="flex text-xl font-medium capitalize">{inputLabel}<p className="text-red-700">*</p></p>
-      <div className="flex">
-        <div>
-          <InputNumber required className="w-[200px]" placeholder={inputPlaceHolder}             maxLength={inputMaxLength}
- />{" "}
-          <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
-            <SettingFilled />{" "}
-          </button>{" "}
-          <br />
-          <p className="flex text-xs opacity-20 ">numbers only</p>
-        </div>
-      </div>
+          <p className="flex text-xl font-medium capitalize">
+            {inputLabel}
+            <p className="text-red-700">*</p>
+          </p>
+          <div className="flex">
+            <div>
+              <InputNumber
+                required
+                className="w-[200px]"
+                placeholder={inputPlaceHolder}
+                maxLength={inputMaxLength}
+              />{" "}
+              <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
+                <SettingFilled />{" "}
+              </button>{" "}
+              <br />
+              <p className="flex text-xs opacity-20 ">numbers only</p>
+            </div>
+          </div>
         </>
       ) : (
         <>
-           <p className="flex text-xl font-medium capitalize">{inputLabel}</p>
-      <div className="flex">
-        <div>
-          <InputNumber className="w-[200px]" placeholder={inputPlaceHolder}             maxLength={inputMaxLength}
- />{" "}
-          <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
-            <SettingFilled />{" "}
-          </button>{" "}
-          <br />
-          <p className="flex text-xs opacity-20 ">numbers only</p>
-        </div>
-      </div>
+          <p className="flex text-xl font-medium capitalize">{inputLabel}</p>
+          <div className="flex">
+            <div>
+              <InputNumber
+                className="w-[200px]"
+                placeholder={inputPlaceHolder}
+                maxLength={inputMaxLength}
+              />{" "}
+              <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
+                <SettingFilled />{" "}
+              </button>{" "}
+              <br />
+              <p className="flex text-xs opacity-20 ">numbers only</p>
+            </div>
+          </div>
         </>
       )}
 
-
-
-
-
-
-
-
-      <p className="flex text-xl font-medium capitalize">{inputLabel}</p>
-      <div className="flex">
-        <div>
-          <InputNumber className="w-[200px]" placeholder={inputPlaceHolder} />{" "}
-          <button className="w-4  mx-4 pt-0 text-2xl " onClick={OnEdit}>
-            <SettingFilled />{" "}
-          </button>{" "}
-          <br />
-          <p className="flex text-xs opacity-20 ">numbers only</p>
-        </div>
-      </div>
       {editModal ? (
         <div
           className="flex  bg-white py-8  transition-y  duration-500
