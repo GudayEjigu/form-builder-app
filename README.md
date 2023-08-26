@@ -45,11 +45,11 @@ Export the form configuration to use it in your projects.
 
 ## Technologies Used
 
-TypeScript
-React
-HTML/CSS
-React-Quill
-Antd
+- TypeScript
+- React
+- HTML/CSS
+- React-Quill
+- Antd
 
 ## Contributing
 
