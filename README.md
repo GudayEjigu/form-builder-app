@@ -56,7 +56,7 @@ Contributions are welcome! If you want to contribute to this project, please fol
 Fork the repository.
 Create a new branch for your feature or bug fix.
 Commit your changes and push them to your forked repository.
-Submit a pull request to the main fork (https://github.com/your-username/typescript-form-builder), providing a detailed description of your changes.
+Submit a pull request to the main fork ( https://github.com/GudayEjigu/form-builder-app.git), providing a detailed description of your changes.
 
 ## Contact
 
