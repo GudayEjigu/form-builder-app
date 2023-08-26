@@ -45,12 +45,11 @@ Follow these steps to set up and run the TypeScript Form Builder app on your loc
 
 ## Technologies Used
 
-- TypeScript
-- React
-- HTML/CSS
-- React-Quill
-- Antd
-- ESLint (for linting)
+TypeScript
+React
+HTML/CSS
+React-Quill
+Antd
 
 ## Contributing
 
