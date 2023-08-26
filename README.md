@@ -37,11 +37,11 @@ Follow these steps to set up and run the TypeScript Form Builder app on your loc
 
 ## Usage
 
-Use the different drawers to select the desired form element type.
-Configure the properties and validation rules and click on the respective button to add the selected form element to your form.
-Configure / delete the properties for each form field using the settings icon on each field.
-Preview the form in real-time to see how it looks.
-Export the form configuration to use it in your projects.
+- Use the different drawers to select the desired form element type.
+- Configure the properties and validation rules and click on the respective button to add the selected form element to your form.
+- Configure / delete the properties for each form field using the settings icon on each field.
+- Preview the form in real-time to see how it looks.
+- Export the form configuration to use it in your projects.
 
 ## Technologies Used
 
