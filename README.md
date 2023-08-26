@@ -75,28 +75,28 @@ Submit a pull request to the main fork ( https://github.com/GudayEjigu/form-buil
 
 ## Usage
 
-Use the different drawers to select the desired form element type.
-Configure the properties and validation rules and click on the respective button to add the selected form element to your form.
-Configure / delete the properties for each form field using the settings icon on each field.
-Preview the form in real-time to see how it looks.
-Export the form configuration to use it in your projects.
+- Use the different drawers to select the desired form element type.
+- Configure the properties and validation rules and click on the respective button to add the selected form element to your form.
+- Configure / delete the properties for each form field using the settings icon on each field.
+- Preview the form in real-time to see how it looks.
+- Export the form configuration to use it in your projects.
 
 ## Technologies Used
 
-TypeScript
-React
-HTML/CSS
-React-Quill
-Antd
+- TypeScript
+- React
+- HTML/CSS
+- React-Quill
+- Antd
 
 ## Contributing
 
 Contributions are welcome! If you want to contribute to this project, please follow these steps:
 
-Fork the repository.
-Create a new branch for your feature or bug fix.
-Commit your changes and push them to your forked repository.
-Submit a pull request to the main fork ( https://github.com/GudayEjigu/form-builder-app.git), providing a detailed description of your changes.
+- Fork the repository.
+- Create a new branch for your feature or bug fix.
+- Commit your changes and push them to your forked repository.
+- Submit a pull request to the main fork ( https://github.com/GudayEjigu/form-builder-app.git), providing a detailed description of your changes.
 
 ## Contact
 
