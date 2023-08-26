@@ -51,6 +51,7 @@ Follow these steps to set up and run the TypeScript Form Builder app on your loc
 - TypeScript
 - React
 - HTML/CSS
+- TailwindCSS
 - React-Quill
 - Antd
 - ESLint (for linting)
