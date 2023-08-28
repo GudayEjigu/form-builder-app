@@ -188,7 +188,7 @@ const Home = () => {
         </div>
         <div className=" w-3/4 h-full  ">
           <p className="text-green-800 font-bold text-6xl my-5">
-            Build Your Form
+            Build Your Custom Form
           </p>
           <div className="mx-12 pl-20 border h-[80vh] overflow-y-auto  overflow-x-auto   mb-8 p-8  bg-amber-50 shadow-xl ">
             <div className="border-b-2">
